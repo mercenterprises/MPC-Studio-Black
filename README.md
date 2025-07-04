@@ -183,7 +183,7 @@ If you plan to take advantage of the `SHIFT+` button operations on the MCP Studi
 
 This would be `SHIFT` + `BUTTON` or Note(49) + Note(*) operation.
 
-### PAD BANK
+#### PAD BANK:
 
 Pad Banks are used to move between different 8 banks of Pad sounds (16 at a time), for a total of 128 different sounds.  This matches up with the same number of banks in Ableton and other DAWs (but is not standard, ex: Arturia's banks of 12 pads on some devices).
 
@@ -200,7 +200,7 @@ This table combined with Pad Banks [A - D] listed in the table above, matches up
 > Note: PadAssign is not a Pad Bank operation, but is a Pad Assignment function (Assign, Copy)
 
 
-### PAD MODE
+#### PAD MODE:
 
 Pad Modes are used change how the pads respond with playing them. 
 
@@ -209,7 +209,7 @@ Pad Modes are used change how the pads respond with playing them.
 |0      |39  |FullLevel   |HalfLevel |n/a           |
 |0      |43  |TrackMute   |PadMute   |n/a           |
 
-### MODE
+#### MODE:
 
 Modes are used to enter different edit modes or track mixes or operations like Sample Record. Implementing these modes should be either mapped to existing Modes in the DAW or you create your own on the device.
 
@@ -221,7 +221,7 @@ Modes are used to enter different edit modes or track mixes or operations like S
 |0      |6   |SampleEdit  |SampleRec  |n/a           |
 |0      |8   |Song        |Other      |n/a           |
 
-### DATA SELECT
+#### DATA SELECT:
 
 Data Select is used to select different views, such as Project view, Program, and Sample. This can be repurposed to show native views in other DAWs and simulate the same behavior that exists in the MPC Software. In your implementation, mapping the folder[1-5] access to custom sample folders could help your workflow. 
 
