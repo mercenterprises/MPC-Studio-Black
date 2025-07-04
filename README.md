@@ -11,15 +11,17 @@
 * [Q-Link Knobs](#QLinkKnobs)  
 * [Jog Wheel](#JogWheel)  
 * [Button Controls](#ButtonControls)  
+* [Shift+ Functionality](#ShiftFunctionality)
 * [Button LED Feedback](#ButtonLEDFeedback)  
 * [Pad LED Feedback](#PADLEDFeedback)  
+* [Numeric+ Functionality](#NumericFunctionality)
 * [LCD Screen](#LCDScreen)  
 * [Integration](#Integration)  
 
 
 <a name="overview" ></a>
 ## Overview
-This repository holds the midi specification for the MPC Studio Black. This information was not provided by AKAI Professional, and I am not affiliated with them in any manner. I am simply an owner of the product and have documented it's MIDI protocol for my personal use. The repo is a product of that my findings.
+This repository holds the midi specification for the MPC Studio Black. This information was not provided by AKAI Professional, and I am not affiliated with them in any manner. I am simply an owner of the product and have documented it's MIDI protocol for my personal use. The repo is a product of that my findings. 
 
 <a name="sysex" ></a>
 ## Sysex Commands
@@ -129,6 +131,7 @@ The buttons on the MPC Studio Black primarily send NoteOn values of 127 for pres
 |0      |36  |PadBankB    |n/a           |
 |0      |37  |PadBankC    |n/a           |
 |0      |38  |PadBankD    |n/a           |
+|0      |112 |PadAssign   |n/a           |
 |0      |39  |FullLevel   |n/a           |
 |0      |40  |16Level     |n/a           |
 |0      |41  |StepSeq     |n/a           |
@@ -136,11 +139,11 @@ The buttons on the MPC Studio Black primarily send NoteOn values of 127 for pres
 |0      |43  |TrackMute   |n/a           |
 |0      |2   |ProgEdit    |n/a           |
 |0      |3   |ProgMix     |n/a           |
-|0      |4   |SeqEdit     |n/a           |
-|0      |5   |SampleEdit  |n/a           |
+|0      |5   |SeqEdit     |n/a           |
+|0      |6   |SampleEdit  |n/a           |
 |0      |8   |Song        |n/a           |
 |0      |44  |Project     |n/a           |
-|0      |45  |SeqEdit     |n/a           |
+|0      |45  |Seq         |n/a           |
 |0      |46  |Prog        |n/a           |
 |0      |47  |Sample      |n/a           |
 |0      |48  |NoFilter    |n/a           |
@@ -171,6 +174,69 @@ The buttons on the MPC Studio Black primarily send NoteOn values of 127 for pres
 |0      |9   |Erase       |n/a           |
 |0      |11  |NoteRepeat  |n/a           |
 
+<a name="ShiftFunctionality" ></a>
+## Shift+ Functionality
+
+> *Only added if complete emulation is your goal. 
+
+If you plan to take advantage of the `SHIFT+` button operations on the MCP Studio Black, the tables below lists the buttons from the table above that need to be monitored while the `SHIFT` button is pressed; to either go into a different mode and draw a different screen, or to perform a different operation all together. 
+
+This would be `SHIFT` + `BUTTON` or Note(49) + Note(*) operation.
+
+### PAD BANK
+
+Pad Banks are used to move between different 8 banks of Pad sounds (16 at a time), for a total of 128 different sounds.  This matches up with the same number of banks in Ableton and other DAW (but is not standard, ex: Arturia's banks of 12 pads of some devices)
+
+This table combined with Pad Banks [A - D] listed in the table above, matches up wth the number of Pad Banks inside an Ableton Drumrack. Again, Pad Assign is for other types of functionality related to pads. 
+
+|Channel|Note|Button Name |Shift+    |Control Change|
+|-------|----|------------|----------|--------------|
+|0      |35  |PadBankA    |PadBankE  |n/a           |
+|0      |36  |PadBankB    |PadBankF  |n/a           |
+|0      |37  |PadBankC    |PadBankG  |n/a           |
+|0      |38  |PadBankD    |PadBankH  |n/a           |
+|0      |112 |PadAssign   |PadCopy   |n/a           |
+
+> Note: PadAssign is not a Pad Bank operation, but is a Pad Assignment function (Assign, Copy)
+
+
+### PAD MODE
+
+Pad Modes are used change how the pads respond with playing them. 
+
+|Channel|Note|Button Name |Shift+    |Control Change|
+|-------|----|------------|----------|--------------|
+|0      |39  |FullLevel   |HalfLevel |n/a           |
+|0      |43  |TrackMute   |PadMute   |n/a           |
+
+### MODE
+
+Modes are used to enter different edit modes or track mixes or operations like Sample Record. Implementing these modes should be either mapped to existing Modes in the DAW or you create your own on the device.
+
+|Channel|Note|Button Name |Shift+     |Control Change|
+|-------|----|------------|-----------|--------------|
+|0      |2   |ProgEdit    |Q-Link     |n/a           |
+|0      |3   |ProgMix     |TrkMix     |n/a           |
+|0      |5   |SeqEdit     |Effects    |n/a           |
+|0      |6   |SampleEdit  |SampleRec  |n/a           |
+|0      |8   |Song        |Other      |n/a           |
+
+### DATA SELECT
+
+Data Select is used to select different views, such as Project view, Program, and Sample. This can be repurposed to show native views in other DAWs and simulate the same behavior that exists in the MPC Software. In your implementation, mapping the folder[1-5] access to custom sample folders could help your workflow. 
+
+|Channel|Note|Button Name |Shift+     |Control Change|
+|-------|----|------------|-----------|--------------|
+|0      |44  |Project     |Folder1    |n/a           |
+|0      |45  |Seq         |Folder2    |n/a           |
+|0      |46  |Prog        |Folder3    |n/a           |
+|0      |47  |Sample      |Folder4    |n/a           |
+|0      |48  |NoFilter    |Folder5    |n/a           |
+|0      |52  |Main        |Tracks     |n/a           |
+|0      |50  |Browser     |Save       |n/a           |
+|0      |51  |Window      |FullScreen |n/a           |
+|0      |67  |Undo        |Redo       |n/a           |
+|0      |11  |NoteRepeat  |Latch      |n/a           |
 
 
 <a name="ButtonLEDFeedback" ></a>
@@ -288,6 +354,37 @@ each power of eight seems to raise the brightness of the color, while the sub_po
 8-15 will give you a different hue, but traversing the power of eight will change the brightness.
 
 I'm almost positive that there is a more concise way to draw color on the MPC Studio Black, but no sysex protocol was provided by Akai. Any assistance here is appreciated.
+
+<a name="NumericFunctionality" ></a>
+## Numeric+ Functionality
+
+> *Only added if complete emulation is your goal. 
+
+Much like the **Shift+** operations, the **Numeric+** operations are performed with the `NUMERIC` button pressed, then selecting a `PAD #` with **Green** text above the pad to the right of the Pad's name. If you plan on taking advantage of this functionality, the table below shows those button and pad combonations. 
+
+That would be a `SHIFT` + `PAD#` or Note(111) + Pad(*) to simulate this same functionality. 
+
+> Note: Buttons kept in MPC ordering to match documentation.
+
+|Channel|CC Number|Pad Number|Numeric+|
+|-------|----|----------|---------|
+|9      |37  |1         |-/+      |
+|9      |36  |2         |0      |
+|9      |42  |3         |CANCEL      |
+|9      |82  |4         |--      |
+|9      |40  |5         |7      |
+|9      |38  |6         |8      |
+|9      |46  |7         |9      |
+|9      |44  |8         |--      |
+|9      |48  |9         |4      |
+|9      |47  |10        |5      |
+|9      |45  |11        |6      |
+|9      |43  |12        |--      |
+|9      |49  |13        |1      |
+|9      |55  |14        |2      |
+|9      |51  |15        |3      |
+|9      |53  |16        |--      |
+
 
 <a name="LCDScreen" ></a>
 ## LCD Screen
