@@ -185,7 +185,7 @@ This would be `SHIFT` + `BUTTON` or Note(49) + Note(*) operation.
 
 ### PAD BANK
 
-Pad Banks are used to move between different 8 banks of Pad sounds (16 at a time), for a total of 128 different sounds.  This matches up with the same number of banks in Ableton and other DAW (but is not standard, ex: Arturia's banks of 12 pads of some devices)
+Pad Banks are used to move between different 8 banks of Pad sounds (16 at a time), for a total of 128 different sounds.  This matches up with the same number of banks in Ableton and other DAWs (but is not standard, ex: Arturia's banks of 12 pads of some devices).
 
 This table combined with Pad Banks [A - D] listed in the table above, matches up wth the number of Pad Banks inside an Ableton Drumrack. Again, Pad Assign is for other types of functionality related to pads. 
 
